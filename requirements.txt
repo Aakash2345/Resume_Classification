@@ -1,7 +1,8 @@
-numpy 
-pandas 
-matplotlib
-seaborn
-scikit-learn==1.6.1
-scipy
 streamlit
+numpy
+matplotlib
+joblib
+wordcloud
+pdf2docx
+python-docx
+nltk
