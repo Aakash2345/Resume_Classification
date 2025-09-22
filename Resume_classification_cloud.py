@@ -2,12 +2,15 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib as jb
-import tempfile, os ,re
+import tempfile, os ,re, nltk
 from wordcloud import WordCloud
 from pdf2docx import Converter
 from docx import Document
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 # pdf to docx
 def convert_pdf_to_docx(input_path, output_path):
@@ -152,3 +155,4 @@ with tab1:
     else:
 
         st.info("Please upload a file in Tab 0 first")
+
