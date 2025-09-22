@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib as jb
-import tempfile, subprocess, os ,re
+import tempfile, os ,re
 from wordcloud import WordCloud
 from pdf2docx import Converter
 from docx import Document
@@ -49,6 +49,7 @@ known_skills = {
     "pl/sql", "html", "css", "aws", "json", "rest", "soap", "ci/cd",
 }
 
+# custom function 
 def clean_text(text):
     # Remove non-letters and lowercase
     text = re.sub('[^a-zA-Z]', ' ', text) # keep only alphabets
@@ -85,7 +86,7 @@ def extract_full_text(file_path):
     return '\n'.join(full_text)
 
 # load model
-model = jb.load("E://Models//Resume_Pipeline.pkl")
+model = jb.load("Resume_Pipeline.pkl")
 
 # creating 2 tabs for prediction and wordcloud
 tab0, tab1 = st.tabs(['Resume Classifier', 'WordCloud'])
@@ -149,4 +150,5 @@ with tab1:
             else:
                 st.warning("No meaningful words left after cleaning. Try entering more descriptive text.")
     else:
+
         st.info("Please upload a file in Tab 0 first")
