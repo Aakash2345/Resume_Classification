@@ -48,8 +48,13 @@ lemma = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
 known_skills = {
-    "sql", "ps", "wf", "react", "js", "wd", "api", "db", "etl", "ai",
-    "pl/sql", "html", "css", "aws", "json", "rest", "soap", "ci/cd",
+    "sql", "ps", "wf", "react", "js", "wd", "api", "db", "etl", "ai", "pl/sql", "html", "css", "aws", 
+    "json", "rest", "soap", "ci/cd", 'python', 'r', 'sql', 'pandas', 'numpy', 'scikit-learn', 'ios',
+    'tensorflow', 'pytorch', 'keras', 'matplotlib', 'seaborn', 'tableau', 'power bi', 'nlp', 
+    'machine learning', 'deep learning', 'kotlin', 'java', 'android studio', 'firebase', 'sqlite', 
+    'jetpack', 'mvvm', 'rest apis', 'material design', 'swift', 'swiftui', 'uikit', 'core data', 'mvvm', 
+    'arKit', 'core ml', 'c', 'c++', 'c#', 'javascript', 'typescript', 'react', 'angular', 'html', 'css', 
+    'node.js', 'django', 'flask', 'spring boot', 'git', 'docker', 'aws'
 }
 
 # custom function 
@@ -101,7 +106,9 @@ with tab0:
         "It can also be influenced by common words that appear across different job roles."
     )
     # labels in sequence as created by label encoder 
-    classes = ['Peoplesoft Resume', 'React Developer', 'SQL Developer', 'workday']
+    classes = ['Android Developer', 'Data Scientist', 'IOS Developer',
+               'Peoplesoft Resume', 'React Developer', 'SQL Developer',
+               'Software Developer', 'workday']
     uploaded_file = st.file_uploader("Upload a DOC, DOCX, or PDF", type=["docx", "pdf"])
 
     if uploaded_file:
@@ -155,4 +162,5 @@ with tab1:
     else:
 
         st.info("Please upload a file in Tab 0 first")
+
 
