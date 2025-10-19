@@ -102,7 +102,7 @@ with tab0:
     # Streamlit section
     st.title("Upload & Convert to DOCX")
     st.info(
-        "Note: The model may misclassify some resumes because it is trained on only four categories. "
+        "Note: The model may misclassify some resumes because it is trained on only Eight (8) categories. "
         "It can also be influenced by common words that appear across different job roles."
     )
     # labels in sequence as created by label encoder 
@@ -162,5 +162,6 @@ with tab1:
     else:
 
         st.info("Please upload a file in Tab 0 first")
+
 
 
