@@ -14,13 +14,13 @@ nltk.download('wordnet')
 
 # pdf to docx
 def convert_pdf_to_docx(input_path, output_path):
-    """
-    Converts .pdf to .docx using pdf2docx.
-    """
     cv = Converter(input_path)
-    # Read full pdf
-    cv.convert(output_path, start=0, end=None)
-    cv.close()
+    try:
+        cv.convert(output_path, start=0, end=None)
+    except Exception as e:
+        print(f"Warning: Some pages could not be converted: {e}")
+    finally:
+        cv.close()
 
  
 def handle_uploaded_file(uploaded_file):
@@ -162,6 +162,7 @@ with tab1:
     else:
 
         st.info("Please upload a file in Tab 0 first")
+
 
 
 
