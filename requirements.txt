@@ -7,3 +7,4 @@ pdf2docx
 python-docx
 nltk
 scikit-learn
+pdfplumber
