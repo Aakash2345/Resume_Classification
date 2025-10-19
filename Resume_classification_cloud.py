@@ -5,6 +5,7 @@ import joblib as jb
 import tempfile, os ,re, nltk
 from wordcloud import WordCloud
 from pdf2docx import Converter
+import pdfplumber
 from docx import Document
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
@@ -13,17 +14,30 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 
 # pdf to docx
-def convert_pdf_to_docx(input_path, output_path):
-    cv = Converter(input_path)
-    try:
-        cv.convert(output_path, start=0, end=None)
-    except Exception as e:
-        print(f"Warning: Some pages could not be converted: {e}")
-    finally:
-        cv.close()
-    if not os.path.exists(output_path):
-        raise FileNotFoundError(f"Conversion failed, file not created at {output_path}")
-    return output_path
+# def convert_pdf_to_docx(input_path, output_path):
+#     cv = Converter(input_path)
+#     try:
+#         cv.convert(output_path, start=0, end=None)
+#     except Exception as e:
+#         print(f"Warning: Some pages could not be converted: {e}")
+#     finally:
+#         cv.close()
+#     if not os.path.exists(output_path):
+#         raise FileNotFoundError(f"Conversion failed, file not created at {output_path}")
+#     return output_path
+
+
+
+def convert_pdf_to_docx(pdf_path, docx_path):
+    doc = Document()
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text = page.extract_text()
+            if text:
+                doc.add_paragraph(text)
+    doc.save(docx_path)
+    return docx_path
+
  
 def handle_uploaded_file(uploaded_file):
     """
@@ -165,6 +179,7 @@ with tab1:
     else:
 
         st.info("Please upload a file in Tab 0 first")
+
 
 
 
