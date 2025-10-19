@@ -21,19 +21,22 @@ def convert_pdf_to_docx(input_path, output_path):
         print(f"Warning: Some pages could not be converted: {e}")
     finally:
         cv.close()
-
+    if not os.path.exists(output_path):
+        raise FileNotFoundError(f"Conversion failed, file not created at {output_path}")
+    return output_path
  
 def handle_uploaded_file(uploaded_file):
     """
-    Takes uploaded file (.doc, .pdf, .docx) from Streamlit and returns the final .docx path.
+    Takes uploaded file (.doc, .pdf) from Streamlit and returns the final .docx path.
     """
     # Save uploaded file temporarily
     with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(uploaded_file.name)[1]) as tmp_file:
         tmp_file.write(uploaded_file.read())
+        tmp_file.flush()
         tmp_path = tmp_file.name
 
     if uploaded_file.name.lower().endswith(".pdf"):
-        tmp_docx_path = tmp_path + ".docx"
+        tmp_docx_path = tmp_path.replace(".pdf", ".docx")
         convert_pdf_to_docx(tmp_path, tmp_docx_path)
 
     elif uploaded_file.name.lower().endswith(".docx"):
@@ -162,6 +165,7 @@ with tab1:
     else:
 
         st.info("Please upload a file in Tab 0 first")
+
 
 
 
